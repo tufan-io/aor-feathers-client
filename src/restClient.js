@@ -58,12 +58,13 @@ export default (client, options = { id: 'id' }) => {
       case CREATE:
         return { data: {...params.data, id: response[options.id]} };
       case GET_LIST:
-        response.data = response.data.map(item => {
+        response.data = response.map(item => {
           if (options.id !== 'id') {
             item.id = item[options.id];
           }
           return item;
         });
+        response.total = response.data.length;
         return response;
       default:
         return response;
